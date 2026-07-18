@@ -3,4 +3,5 @@ uvicorn
 jinja2
 python-multipart
 faster-whisper
-google-generativeai
+google-genai
+python-dotenv
