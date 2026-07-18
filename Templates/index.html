@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bank Voice Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!--Background -->
+    <div class="background-glow glow1"></div>
+    <div class="background-glow glow2"></div>
+
+    <!-- Main Card -->
+    <div class="container">
+
+        <!-- Microphone Icon -->
+        <div class="mic-circle">
+            <i class="fa-solid fa-microphone"></i>
+        </div>
+
+        <!-- Heading -->
+        <h1>
+            Bank Voice
+            <span>Assistant</span>
+        </h1>
+
+        <p class="subtitle">
+            Upload or record your voice command and let AI understand your banking request.
+        </p>
+
+        <!-- Form -->
+        <form id="audioForm"
+              action="/upload"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <!-- File Upload -->
+
+            <label class="upload-box">
+
+                <input
+                    type="file"
+                    id="audio"
+                    name="audio"
+                    accept="audio/*">
+
+                <i class="fa-solid fa-file-audio"></i>
+
+                <span id="file-name">
+                    Choose Audio File
+                </span>
+
+            </label>
+
+            <p class="or-text">OR</p>
+
+            <!-- Record Button -->
+
+            <button
+                type="button"
+                id="recordBtn"
+                class="record-btn">
+
+                🎤 Start Recording
+
+            </button>
+
+            <!-- Audio Preview -->
+
+            <audio
+                id="audioPreview"
+                controls
+                style="display:none;">
+            </audio>
+
+            <!-- Upload -->
+
+            <button
+                type="submit"
+                id="uploadBtn">
+
+                Upload Audio
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
