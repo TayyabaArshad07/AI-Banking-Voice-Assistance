@@ -2,11 +2,7 @@
 
 ## Introduction
 
-The **AI Banking Voice Assistant** is a voice-enabled web application that allows users to interact with banking services using natural language voice commands. Users can either record their voice through the browser or upload an audio file.
-
-The application converts speech into text using **Faster-Whisper** and then uses **Google Gemini** to understand the user's request, identify the banking intent, and extract relevant information such as the transaction amount and recipient. The extracted information is returned in a structured JSON format.
-
-This project demonstrates the integration of **Speech-to-Text (STT)**, **Natural Language Processing (NLP)**, and **Large Language Models (LLMs)** in a banking use case.
+The AI Banking Voice Assistant is a voice-enabled web application that allows users to interact with banking services using natural language voice commands. Users can record their voice or upload an audio file. The application uses Faster-Whisper for speech-to-text conversion and Google Gemini to identify banking intents and extract relevant information. It supports both English and Urdu voice commands, automatically translates Hindi transcripts to Urdu when required, and includes rate limiting to prevent request spamming.
 
 ---
 
@@ -29,25 +25,26 @@ This project demonstrates the integration of **Speech-to-Text (STT)**, **Natural
 ### Additional Libraries
 - Jinja2
 - Python Multipart
+- SlowAPI
+- Python-dotenv
 
 ---
 
 ## Project Workflow
 
 1. The user records a voice command or uploads an audio file.
-2. The audio file is sent to the FastAPI backend.
-3. Faster-Whisper converts the speech into text.
-4. The transcription is passed to Google Gemini.
-5. Gemini identifies the banking intent and extracts the required information.
-6. The application returns a structured JSON response containing the detected intent and extracted entities.
+2. The audio is sent to the FastAPI backend.
+3. Faster-Whisper converts speech into text and detects the language.
+4. If the transcript is detected in Hindi, it is translated into Urdu.
+5. Google Gemini identifies the banking intent and extracts the required information.
+6. The application returns a structured JSON response.
+7. Rate limiting prevents excessive requests and API spamming.
 
 ---
 
 ## Supported Voice Commands
 
 ### 1. Send Money
-
-Transfers money to another person.
 
 **Intent:** `Send_money`
 
@@ -58,8 +55,8 @@ Transfers money to another person.
 **Example Commands**
 - "Send 500 rupees to Ali."
 - "Transfer 2,000 rupees to Ahmed."
-- "Please send 1,500 rupees to Sara."
-- "Send five thousand rupees to John."
+- "Ali ko 5000 rupees bhejo."
+- "علی کو 5000 روپے بھیجو۔"
 
 **Example Output**
 
@@ -76,21 +73,19 @@ Transfers money to another person.
 
 ### 2. Download Bank Statement
 
-Downloads or generates the user's bank statement.
-
-**Intent:** `Download_bank_statement`
+**Intent:** `Download_statement`
 
 **Example Commands**
 - "Download my bank statement."
 - "Generate my account statement."
-- "I need my bank statement."
-- "Show my account statement."
+- "Mera bank statement download karo."
+- "میرا بینک اسٹیٹمنٹ ڈاؤن لوڈ کرو۔"
 
 **Example Output**
 
 ```json
 {
-  "intent": "Download_bank_statement",
+  "intent": "Download_statement",
   "amount": "",
   "receiver": "",
   "message": ""
@@ -101,15 +96,13 @@ Downloads or generates the user's bank statement.
 
 ### 3. Pay Bill
 
-Recognizes utility or service bill payment requests.
-
 **Intent:** `Pay_bill`
 
 **Example Commands**
 - "Pay my electricity bill."
 - "Pay my gas bill."
-- "Pay my internet bill."
-- "Pay my water bill."
+- "Bijli ka bill ada karo."
+- "میرا بجلی کا بل ادا کرو۔"
 
 **Example Output**
 
@@ -125,8 +118,6 @@ Recognizes utility or service bill payment requests.
 ---
 
 ### 4. Unknown Commands
-
-Commands unrelated to the supported banking operations are classified as unknown.
 
 **Intent:** `Unknown`
 
