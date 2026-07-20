@@ -96,7 +96,7 @@ async def home(request: Request):
 # Upload Audio
 
 @app.post("/upload")
-@limiter.limit("1/minute")
+@limiter.limit("5/minute")
 async def upload_audio(
     request: Request,
     audio: UploadFile = File(...)
