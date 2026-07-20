@@ -77,7 +77,7 @@ templates = Jinja2Templates(
 print("Loading Whisper Model...")
 
 whisper_model = WhisperModel(
-    "small",
+     "base",
     device="cpu",
     compute_type="int8"
 )
